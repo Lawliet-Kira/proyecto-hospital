@@ -14,44 +14,45 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.democrud.model.Persona;
-import com.example.democrud.service.api.PersonaServiceAPI;
+import com.example.democrud.model.Medico;
+import com.example.democrud.service.api.MedicoServiceAPI;
+
+
 
 @RestController
-@RequestMapping(value = "/api/v1/")
+@RequestMapping(value = "/medico/")
 @CrossOrigin("*")
-public class PersonaRestController {
+public class MedicoRestController {
 
 	@Autowired
-	private PersonaServiceAPI personaServiceAPI;
+	private MedicoServiceAPI medicoServiceAPI;
 
 	@GetMapping(value = "/all")
-	public List<Persona> getAll() {
-		return personaServiceAPI.getAll();
+	public List<Medico> getAll() {
+		return medicoServiceAPI.getAll();
 	}
 	
 	@GetMapping(value = "/find/{id}")
-	public Persona find(@PathVariable Long id) {
-		return personaServiceAPI.get(id);
+	public Medico find(@PathVariable Long id) {
+		return medicoServiceAPI.get(id);
 	}
 
 	@PostMapping(value = "/save")
-	public ResponseEntity<Persona> save(@RequestBody Persona persona) {
-		Persona obj = personaServiceAPI.save(persona);
-		return new ResponseEntity<Persona>(obj, HttpStatus.OK);
+	public ResponseEntity<Medico> save(@RequestBody Medico medico) {
+		Medico obj = medicoServiceAPI.save(medico);
+		return new ResponseEntity<Medico>(obj, HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/delete/{id}")
-	public ResponseEntity<Persona> delete(@PathVariable Long id) {
-		Persona persona = personaServiceAPI.get(id);
-		
-		if (persona != null) {
-			personaServiceAPI.delete(id);
+	public ResponseEntity<Medico> delete(@PathVariable Long id) {
+		Medico medico = medicoServiceAPI.get(id);
+		if (medico != null) {
+			medicoServiceAPI.delete(id);
 		}else {
-			return new ResponseEntity<Persona>(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<Medico>(HttpStatus.NO_CONTENT);
 		}
 		
-		return new ResponseEntity<Persona>(persona, HttpStatus.OK);
+		return new ResponseEntity<Medico>(medico, HttpStatus.OK);
 	}
-
+	
 }
