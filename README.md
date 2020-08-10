@@ -5,7 +5,8 @@ CRUD con Spring Boot utilizando Thymeleaf y Bootstrap
 
 Desarrollado por:
 <b>Vienesas San Jorge</b>
-- Kroko
+
 - Lawliet-Kira
 - Maldos
+- Kroko
 
