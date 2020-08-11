@@ -1,15 +1,19 @@
 package com.example.democrud.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import org.springframework.data.rest.core.annotation.RestResource;
 
 @Entity
+@Table(name="medico")
 public class Medico {
 
     @Id
@@ -25,10 +29,10 @@ public class Medico {
     @Column
     private Boolean activo;
     
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="idPersona")
-    private Persona datosPersona;
-
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="persona_id", referencedColumnName="id")
+    private Persona persona;
+    
 	public Long getId() {
 		return id;
 	}
@@ -62,13 +66,13 @@ public class Medico {
 	}
 
 	public Persona getPersona() {
-		return datosPersona;
+		return persona;
 	}
 
 	public void setPersona(Persona persona) {
-		datosPersona = persona;
+		this.persona = persona;
 	}
 
-	
+
     
 }

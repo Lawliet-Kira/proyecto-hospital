@@ -2,19 +2,19 @@ package com.example.democrud.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="persona")
 public class Persona {
 
 	@Id
-    //@OneToOne(mappedBy = "datosPersona")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idPersona")
+	@Column(name="id")
 	private Long id;
 	
 	@Column
@@ -28,6 +28,9 @@ public class Persona {
 	
 	@Column
 	private String telefono;
+		
+	@OneToOne(mappedBy="persona")
+	private Medico medico;
 
 	public Long getId() {
 		return id;
@@ -68,4 +71,16 @@ public class Persona {
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
+
+	public Medico getMedico() {
+		return medico;
+	}
+
+	public void setMedico(Medico medico) {
+		this.medico = medico;
+	}
+	
+	
+	
+	
 }

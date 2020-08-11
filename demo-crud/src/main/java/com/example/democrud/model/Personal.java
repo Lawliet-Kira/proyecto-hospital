@@ -2,7 +2,6 @@ package com.example.democrud.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,9 +27,9 @@ public class Personal{
     @Column
     private Boolean activo;
     
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne
     @JoinColumn(name="idPersona")
-    private Persona datosPersona;
+    private Persona Persona;
 
 	public Long getIdPersonalMed() {
 		return idPersonalMed;
@@ -73,11 +72,11 @@ public class Personal{
 	}
 
 	public Persona getPersona() {
-		return datosPersona;
+		return Persona;
 	}
 
 	public void setPersona(Persona persona) {
-		datosPersona = persona;
+		Persona = persona;
 	}
 
     
