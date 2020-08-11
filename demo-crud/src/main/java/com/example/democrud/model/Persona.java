@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="persona")
 public class Persona {
@@ -30,7 +32,16 @@ public class Persona {
 	private String telefono;
 		
 	@OneToOne(mappedBy="persona")
+	@JsonIgnoreProperties("persona")
 	private Medico medico;
+	
+	@OneToOne(mappedBy="persona")
+	@JsonIgnoreProperties("persona")
+	private Gestor gestor;
+	
+	@OneToOne(mappedBy="persona")
+	@JsonIgnoreProperties("persona")
+	private Personal personal;
 
 	public Long getId() {
 		return id;
@@ -78,6 +89,22 @@ public class Persona {
 
 	public void setMedico(Medico medico) {
 		this.medico = medico;
+	}
+
+	public Gestor getGestor() {
+		return gestor;
+	}
+
+	public void setGestor(Gestor gestor) {
+		this.gestor = gestor;
+	}
+
+	public Personal getPersonal() {
+		return personal;
+	}
+
+	public void setPersonal(Personal personal) {
+		this.personal = personal;
 	}
 	
 	

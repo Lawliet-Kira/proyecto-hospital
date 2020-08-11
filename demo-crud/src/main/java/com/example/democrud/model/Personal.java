@@ -1,5 +1,6 @@
 package com.example.democrud.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,13 +8,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
+@Table(name="personal")
 public class Personal{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idPersonalMed;
+    private Long id;
 
     @Column
     private String cargo;
@@ -22,21 +27,22 @@ public class Personal{
     private String permisos;
 
     @Column
-    private String tipoPersonal;
+    private String tipo;
 
     @Column
     private Boolean activo;
     
-    @OneToOne
-    @JoinColumn(name="idPersona")
-    private Persona Persona;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="persona_id", referencedColumnName="id")
+    @JsonIgnoreProperties("personal")
+    private Persona persona;
 
-	public Long getIdPersonalMed() {
-		return idPersonalMed;
+	public Long getId() {
+		return id;
 	}
 
-	public void setIdPersonalMed(Long idPersonalMed) {
-		this.idPersonalMed = idPersonalMed;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getCargo() {
@@ -55,12 +61,12 @@ public class Personal{
 		this.permisos = permisos;
 	}
 
-	public String getTipoPersonal() {
-		return tipoPersonal;
+	public String getTipo() {
+		return tipo;
 	}
 
-	public void setTipoPersonal(String tipoPersonal) {
-		this.tipoPersonal = tipoPersonal;
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 	public Boolean getActivo() {
@@ -72,14 +78,12 @@ public class Personal{
 	}
 
 	public Persona getPersona() {
-		return Persona;
+		return persona;
 	}
 
 	public void setPersona(Persona persona) {
-		Persona = persona;
+		this.persona = persona;
 	}
-
-    
     
 
 }

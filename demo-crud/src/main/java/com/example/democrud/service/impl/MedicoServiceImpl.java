@@ -26,23 +26,23 @@ public class MedicoServiceImpl extends GenericServiceImpl<Medico, Long> implemen
 	public CrudRepository<Medico, Long> getDao() {
 		return medicoDaoAPI;
 	}
-
+	
 	@Override
 	public Medico createMedico(MedicoDTO medico) {
-		Medico New_medic;
+		Medico New_medico;
 		Persona persona = personaServiceAPI.get(medico.getPersona_id());
 		
 		if( persona != null ) {
-			New_medic = new Medico();
-			New_medic.setEspecialidad(medico.getEspecialidad());
-			New_medic.setPermisos(medico.getPermisos());
-			New_medic.setActivo(medico.getActivo());
-			New_medic.setPersona(persona);
+			New_medico = new Medico();
+			New_medico.setEspecialidad(medico.getEspecialidad());
+			New_medico.setPermisos(medico.getPermisos());
+			New_medico.setActivo(medico.getActivo());
+			New_medico.setPersona(persona);
 		}else{
-			New_medic = null;
+			New_medico = null;
 		}	
 		
-		return New_medic;
+		return New_medico;
 	}
 	
 	
