@@ -18,7 +18,7 @@ import com.example.democrud.model.Persona;
 import com.example.democrud.service.api.PersonaServiceAPI;
 
 @RestController
-@RequestMapping(value = "/api/v1/")
+@RequestMapping(value = "/persona/")
 @CrossOrigin("*")
 public class PersonaRestController {
 
