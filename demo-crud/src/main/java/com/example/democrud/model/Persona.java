@@ -24,6 +24,9 @@ public class Persona {
 	
 	@Column
 	private String telefono;
+	
+	@OneToOne(mappedBy = "datosPersona")
+	private Medico medico;
 
 	public Long getId() {
 		return id;
