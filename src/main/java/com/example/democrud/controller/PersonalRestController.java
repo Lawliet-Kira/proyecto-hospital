@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.democrud.model.Medico;
 import com.example.democrud.model.Personal;
+import com.example.democrud.model.dto.MedicoDTO;
 import com.example.democrud.model.dto.PersonalDTO;
 import com.example.democrud.service.api.PersonalServiceAPI;
 
@@ -29,6 +31,18 @@ public class PersonalRestController {
 	public List<Personal> getAll(){
 		return personalServiceAPI.getAll();
 	}
+	
+	@PostMapping(value="/update")
+	public ResponseEntity<Personal> update(@RequestBody PersonalDTO personal){
+		Personal obj = personalServiceAPI.get(personal.getId());
+		obj.setCargo(personal.getCargo());
+		obj.setTipo(personal.getTipo());
+		obj.setPermisos(personal.getPermisos());
+		obj.setActivo(personal.getActivo());
+		personalServiceAPI.save(obj);
+		return new ResponseEntity<Personal>(obj, HttpStatus.OK);
+	}
+	
 	
 	@GetMapping(value = "/find/{id}")
 	public Personal find(@PathVariable Long id) {

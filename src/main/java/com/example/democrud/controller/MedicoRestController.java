@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.democrud.model.Medico;
+import com.example.democrud.model.Persona;
 import com.example.democrud.model.dto.MedicoDTO;
 import com.example.democrud.service.api.MedicoServiceAPI;
+import com.example.democrud.service.api.PersonaServiceAPI;
 
 @RestController
 @RequestMapping(value = "/medico/")
@@ -33,6 +35,16 @@ public class MedicoRestController {
 	@GetMapping(value = "/find/{id}")
 	public Medico find(@PathVariable Long id) {
 		return medicoServiceAPI.get(id);
+	}
+	
+	@PostMapping(value="/update")
+	public ResponseEntity<Medico> update(@RequestBody MedicoDTO medico){
+		Medico obj = medicoServiceAPI.get(medico.getId());
+		obj.setActivo(medico.getActivo());
+		obj.setEspecialidad(medico.getEspecialidad());
+		obj.setPermisos(medico.getPermisos());
+		medicoServiceAPI.save(obj);
+		return new ResponseEntity<Medico>(obj, HttpStatus.OK);
 	}
 	
 	// Gestionar el ConstraintViolationException cuando ya existe un medico

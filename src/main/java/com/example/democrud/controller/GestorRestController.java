@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.democrud.model.Gestor;
+import com.example.democrud.model.Personal;
 import com.example.democrud.model.dto.GestorDTO;
+import com.example.democrud.model.dto.PersonalDTO;
 import com.example.democrud.service.api.GestorServiceAPI;
 
 @RestController
@@ -34,6 +36,16 @@ public class GestorRestController {
 	public Gestor find(@PathVariable Long id) {
 		return gestorServiceAPI.get(id);
 	}
+	
+	@PostMapping(value="/update")
+	public ResponseEntity<Gestor> update(@RequestBody GestorDTO gestor){
+		Gestor obj = gestorServiceAPI.get(gestor.getId());
+		obj.setActivo(gestor.getActivo());
+		obj.setPermisos(gestor.getPermisos());
+		gestorServiceAPI.save(obj);
+		return new ResponseEntity<Gestor>(obj, HttpStatus.OK);
+	}
+	
 	
 	@PostMapping(value = "/save")
 	public ResponseEntity<Gestor> save(@RequestBody GestorDTO gestor){
